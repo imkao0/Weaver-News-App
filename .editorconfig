@@ -1,0 +1,25 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+max_line_length = off
+
+[*.{kt,kts}]
+ij_kotlin_allow_trailing_comma = true
+ij_kotlin_allow_trailing_comma_on_call_site = true
+ktlint_code_style = android_studio
+ij_kotlin_imports_layout = *, java.**, javax.**, kotlin.**, ^
+# Deliberately disabled noisy rules
+ktlint_standard_max-line-length = disabled
+ktlint_standard_function-naming = disabled
+ktlint_standard_property-naming = disabled
+ktlint_standard_no-consecutive-comments = disabled
+ktlint_standard_class-naming = disabled
+ktlint_standard_filename = disabled
+
+[*.{yml,yaml}]
+indent_size = 2
