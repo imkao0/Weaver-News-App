@@ -1,0 +1,52 @@
+plugins {
+    alias(libs.plugins.weaver.android.library)
+    alias(libs.plugins.weaver.android.hilt)
+    alias(libs.plugins.weaver.android.room)
+    alias(libs.plugins.ksp)
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localProperties.load(new FileInputStream(localPropertiesFile))
+}
+
+android {
+    namespace 'dev.mkao.weaver.data'
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    buildTypes.each {
+        def gnewsApiKey = localProperties.getProperty("GNEWS_API_KEY") ?: "\"${System.getenv("GNEWS_API_KEY") ?: ""}\""
+        it.buildConfigField('String', 'GNEWS_API_KEY', gnewsApiKey)
+        def worldNewsApiKey = localProperties.getProperty("WORLDNEWS_API_KEY") ?: "\"${System.getenv("WORLDNEWS_API_KEY") ?: ""}\""
+        it.buildConfigField('String', 'WORLDNEWS_API_KEY', worldNewsApiKey)
+    }
+    kotlinOptions {
+        freeCompilerArgs = ['-XXLanguage:+PropertyParamAnnotationDefaultTargetMode']
+    }
+}
+
+dependencies {
+    implementation project(':core:domain')
+    implementation project(':core:common')
+
+    implementation libs.datastore.preferences
+
+    implementation libs.retrofit
+    implementation libs.converter.moshi
+    implementation libs.okhttp
+    implementation libs.logging.interceptor
+    implementation libs.moshi
+    implementation libs.moshi.kotlin
+    ksp libs.moshi.kotlin.codegen
+
+    implementation libs.timber
+
+    debugImplementation libs.chucker.debug
+    releaseImplementation libs.chucker.release
+
+    implementation libs.kotlinx.coroutines.core
+}
