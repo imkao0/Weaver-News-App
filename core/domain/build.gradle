@@ -1,0 +1,12 @@
+plugins {
+    alias(libs.plugins.weaver.android.library)
+}
+
+android {
+    namespace 'dev.mkao.weaver.domain'
+}
+
+dependencies {
+    implementation project(':core:common')
+    implementation libs.kotlinx.coroutines.core
+}

@@ -1,15 +1,35 @@
+# Git Ignore File
+
+# Built artifacts
+**/build/
+**/bin/
+**/out/
+
+# IDE files
+.idea/
 *.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
+.vscode/
+
+# Android Specific
+local.properties
 /captures
 .externalNativeBuild
 .cxx
-local.properties
+google-services.json
+google-play-key.json
+*.jks
+
+# Gradle
+.gradle/
+
+# Kotlin
+.kotlin/
+
+# Agent & Logs
+.artifacts/
+terminal_logs/
+.upnext_analysis/
+
+# OS Specific
+.DS_Store
+Thumbs.db

@@ -1,0 +1,241 @@
+# Weaver News — Version Catalog
+# Single source of truth for all dependency coordinates.
+#
+# NOTE — deliberate version choices:
+#   * AGP stays on 8.7.3 so the build remains compatible with
+#     the current Android Studio/Gradle 8.11.1 toolchain. A side effect is that
+#     the Firebase Performance Gradle plugin must stay on the 1.4.x line.
+#   * KSP is pinned to 2.2.10-2.0.2 — the release that matches Kotlin 2.2.10.
+#   * Hilt is pinned to 2.57.2 — the newest Hilt release line
+#     whose KSP processor runs on KSP 2.0.x (KSP1) AND whose unshaded
+#     kotlinx-metadata supports Kotlin 2.2 (Dagger #4779, fixed in 2.57). Hilt
+#     2.51.x (the original pin) crashes on Kotlin 2.2's metadata.
+#   * androidx.hilt is pinned to 1.2.0 — 1.3.0 is compiled
+#     against Hilt 2.59's KSType processor.
+#   * Room is pinned to 2.7.2 — Room 2.8.x requires KSP2.
+#   * Coil stays on 2.7.0 — coil3 is a group-id migration
+#     scheduled with the UI rework milestone.
+#   * accompanist-permissions stays on 0.36.0 — 0.37.x
+#     requires Kotlin 2.2.20+.
+
+[versions]
+# --- Build platform ---
+androidGradlePlugin = "8.9.1"          # pinned to 8.9.1 — the minimum the Navigation3/lifecycle 2.10 stack requires; stays on the Gradle 8.x line
+kotlin = "2.2.10"
+ksp = "2.2.10-2.0.2"                   # must match the Kotlin 2.2.10 compiler
+ktlint = "12.3.0"
+detekt = "1.23.8"
+gmsPlugin = "4.4.4"
+firebaseCrashlyticsGradle = "3.0.6"
+firebasePerfGradlePlugin = "1.4.2"
+baselineProfile = "1.3.4"              # latest stable compatible with AGP 8.7.3
+
+# --- AndroidX core / lifecycle ---
+ktx = "1.17.0"
+appcompat = "1.7.1"
+androidMaterial = "1.13.0"
+lifecycle = "2.10.0"
+activityCompose = "1.12.4"
+coreSplashscreen = "1.0.1"
+androidxWindowCore = "1.5.1"           # window-core layout WindowSizeClass
+
+# --- Compose ---
+composeBom = "2025.08.00"              # latest stable BOM compatible with Kotlin 2.2.10
+androidMaterial3Adaptive = "1.2.0"     # adaptive skips 1.1.1: 1.1.0 -> 1.2.0
+navigation3 = "1.1.2"
+lifecycleViewmodelNavigation3 = "2.10.0"
+materialIconsExtended = "1.7.8"
+coilCompose = "2.7.0"
+composeShimmer = "1.3.3"
+accompanistPermissions = "0.36.0"      # 0.37.x needs Kotlin 2.2.20+
+gson = "2.14.0"
+jsoup = "1.23.2"
+accompanistSystemuicontroller = "0.36.0"
+
+# --- Dependency injection & background work ---
+daggerHilt = "2.57.2"                  # 2.57.2 is the newest line that fixes the Kotlin 2.2 metadata bug (#4779) while still running on KSP1 / AGP 8.x
+androidxHilt = "1.2.0"
+hiltAndroidTesting = "2.57.2"
+workRuntimeKtx = "2.11.1"              # latest stable at plan time
+
+# --- Networking & serialization ---
+retrofit = "3.0.0"
+okhttp = "5.3.2"
+moshi = "1.15.2"
+kotlinxSerializationJson = "1.8.0"     # powers Navigation-3 type-safe routes
+androidxBrowser = "1.9.0"                # Chrome Custom Tabs for the detail screen
+media3 = "1.8.0"                         # ExoPlayer/Media3 for the TikTok-style full-screen video player
+androidYoutubePlayer = "13.0.0"
+
+# --- Persistence ---
+room = "2.7.2"
+datastorePreferences = "1.1.4"         # latest stable at plan time
+
+# --- Coroutines ---
+kotlinxCoroutines = "1.10.2"
+
+# --- Developer experience & debugging ---
+timber = "5.0.1"
+chuckerVersion = "4.0.0"
+leakcanaryAndroid = "2.14"
+
+# --- Performance & telemetry ---
+firebaseBom = "33.13.0"                # BoM-managed analytics-ktx/crashlytics/perf (latest stable)
+androidxBenchmarkJunit4 = "1.3.4"      # aligned with baseline-profile plugin
+profileinstaller = "1.4.1"
+
+# --- Testing ---
+junit = "4.13.2"
+androidxTestJunit = "1.3.0"
+androidxTestRunner = "1.7.0"
+androidxTestUiAutomator = "2.3.0"
+espresso = "3.7.0"
+androidxArchCoreTesting = "2.2.0"
+turbine = "1.2.1"
+mockitoCore = "5.22.0"
+mockitoKotlin = "5.4.0"
+
+# --- Misc ---
+desugarJdkLibs = "2.0.4"
+
+[libraries]
+# --- AndroidX core / lifecycle ---
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "ktx" }
+androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+android-material = { group = "com.google.android.material", name = "material", version.ref = "androidMaterial" }
+androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
+androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
+androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+androidx-lifecycle-viewmodel-navigation3 = { module = "androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "lifecycleViewmodelNavigation3" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+
+# --- Compose (BOM-managed where no explicit version is given) ---
+compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
+compose-ui = { module = "androidx.compose.ui:ui" }
+compose-ui-graphics = { module = "androidx.compose.ui:ui-graphics" }
+compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
+compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
+compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
+compose-material3 = { module = "androidx.compose.material3:material3" }
+material3-window-size-classes = { module = "androidx.compose.material3:material3-window-size-class" }
+androidx-window-core = { module = "androidx.window:window-core", version.ref = "androidxWindowCore" }
+android-material3-adaptive = { module = "androidx.compose.material3.adaptive:adaptive", version.ref = "androidMaterial3Adaptive" }
+android-material3-adaptive-layout = { module = "androidx.compose.material3.adaptive:adaptive-layout", version.ref = "androidMaterial3Adaptive" }
+android-material3-adaptive-navigation = { module = "androidx.compose.material3.adaptive:adaptive-navigation", version.ref = "androidMaterial3Adaptive" }
+android-material3-adaptive-navigation-suite = { module = "androidx.compose.material3:material3-adaptive-navigation-suite" }
+material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "materialIconsExtended" }
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
+compose-shimmer = { module = "com.valentinilk.shimmer:compose-shimmer", version.ref = "composeShimmer" }
+accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
+
+# --- Navigation ---
+androidx-navigation3-runtime = { module = "androidx.navigation3:navigation3-runtime", version.ref = "navigation3" }
+androidx-navigation3-ui = { module = "androidx.navigation3:navigation3-ui", version.ref = "navigation3" }
+
+# --- Dependency injection & background work ---
+dagger-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "daggerHilt" }
+hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "daggerHilt" }
+hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hiltAndroidTesting" }
+android-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "androidxHilt" }
+android-hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "androidxHilt" }
+android-hilt-work-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "androidxHilt" }
+work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "workRuntimeKtx" }
+androidx-work-testing = { module = "androidx.work:work-testing", version.ref = "workRuntimeKtx" }
+
+# --- Networking & serialization ---
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
+moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshi" }
+moshi-kotlin-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshi" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }
+accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistSystemuicontroller" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+androidx-browser = { module = "androidx.browser:browser", version.ref = "androidxBrowser" }
+
+# --- Media3 / ExoPlayer (TikTok-style video player) ---
+media3-exoplayer = { module = "androidx.media3:media3-exoplayer", version.ref = "media3" }
+media3-ui = { module = "androidx.media3:media3-ui", version.ref = "media3" }
+android-youtube-player = { module = "com.pierfrancescosoffritti.androidyoutubeplayer:core", version.ref = "androidYoutubePlayer" }
+
+# --- Persistence ---
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+room-testing = { module = "androidx.room:room-testing", version.ref = "room" }
+datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
+
+# --- Coroutines ---
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+
+# --- Developer experience & debugging ---
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+chucker-debug = { module = "com.github.chuckerteam.chucker:library", version.ref = "chuckerVersion" }
+chucker-release = { module = "com.github.chuckerteam.chucker:library-no-op", version.ref = "chuckerVersion" }
+leakcanary-android = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanaryAndroid" }
+detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
+
+# --- Performance & telemetry ---
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-analytics-ktx = { module = "com.google.firebase:firebase-analytics-ktx" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
+firebase-perf = { module = "com.google.firebase:firebase-perf" }
+profileinstaller = { module = "androidx.profileinstaller:profileinstaller", version.ref = "profileinstaller" }
+androidx-benchmark-macrobenchmark-junit4 = { module = "androidx.benchmark:benchmark-macro-junit4", version.ref = "androidxBenchmarkJunit4" }
+
+# --- Testing ---
+junit = { module = "junit:junit", version.ref = "junit" }
+androidx-test-ext-junit = { module = "androidx.test.ext:junit", version.ref = "androidxTestJunit" }
+androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidxTestRunner" }
+androidx-test-uiautomator = { module = "androidx.test.uiautomator:uiautomator", version.ref = "androidxTestUiAutomator" }
+espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
+androidx-arch-core-testing = { module = "androidx.arch.core:core-testing", version.ref = "androidxArchCoreTesting" }
+mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
+mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockitoKotlin" }
+mockito-android = { module = "org.mockito:mockito-android", version.ref = "mockitoCore" }
+
+# --- Misc ---
+desugar-jdk-libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugarJdkLibs" }
+
+# --- Gradle plugin markers (compileOnly deps for the build-logic convention plugins) ---
+android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "androidGradlePlugin" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+ksp-gradle-plugin = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+baselineprofile-gradle-plugin = { module = "androidx.baselineprofile:androidx.baselineprofile.gradle.plugin", version.ref = "baselineProfile" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+android-test = { id = "com.android.test", version.ref = "androidGradlePlugin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+hilt-gradle = { id = "com.google.dagger.hilt.android", version.ref = "daggerHilt" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+gms = { id = "com.google.gms.google-services", version.ref = "gmsPlugin" }
+firebase-crashlytics-gradle = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlyticsGradle" }
+firebase-perf-gradle = { id = "com.google.firebase.firebase-perf", version.ref = "firebasePerfGradlePlugin" }
+baseline-profiles = { id = "androidx.baselineprofile", version.ref = "baselineProfile" }
+
+# --- Weaver convention plugins (build-logic) ---
+weaver-android-application = { id = "weaver.android.application", version = "1.0" }
+weaver-android-application-compose = { id = "weaver.android.application.compose", version = "1.0" }
+weaver-android-application-firebase = { id = "weaver.android.application.firebase", version = "1.0" }
+weaver-android-library = { id = "weaver.android.library", version = "1.0" }
+weaver-android-library-compose = { id = "weaver.android.library.compose", version = "1.0" }
+weaver-android-hilt = { id = "weaver.android.hilt", version = "1.0" }
+weaver-android-room = { id = "weaver.android.room", version = "1.0" }
+weaver-android-test = { id = "weaver.android.test", version = "1.0" }
