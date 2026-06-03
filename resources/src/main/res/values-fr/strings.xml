@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- French (fr) translations — core navigation & common UI strings.
+     Untranslated strings fall back to the default values/strings.xml (English). -->
+<resources>
+    <string name="app_name">Weaver</string>
+    <string name="nav_home">Accueil</string>
+    <string name="nav_video_feed">Vidéos</string>
+    <string name="nav_search">Recherche</string>
+    <string name="nav_categories">Catégories</string>
+    <string name="nav_bookmarks">Favoris</string>
+    <string name="search_for_articles">Rechercher des articles</string>
+    <string name="manage_topics">Gérer les sujets</string>
+    <string name="selected">Sélectionnés</string>
+    <string name="topics">Sujets</string>
+    <string name="no_videos_available">Aucune vidéo disponible</string>
+    <string name="settings">Paramètres</string>
+    <string name="select_edition">Choisir l\'édition</string>
+    <string name="confirm">Confirmer</string>
+    <string name="retry">Réessayer</string>
+    <string name="no_articles_available">Aucun article disponible</string>
+    <string name="no_bookmarks_yet">Aucun favori pour le moment. Les articles enregistrés apparaîtront ici.</string>
+    <string name="refresh">Actualiser</string>
+    <string name="blocked_sources">Sources bloquées</string>
+    <string name="dark_mode">Mode sombre</string>
+    <string name="push_notifications">Notifications push</string>
+    <string name="recent_searches">Recherches récentes</string>
+    <string name="clear">Effacer</string>
+    <string name="share_video">Partager la vidéo</string>
+    <string name="add_to_favorites">Ajouter aux favoris</string>
+    <string name="remove_from_favorites">Retirer des favoris</string>
+    <string name="close_player">Fermer le lecteur</string>
+    <string name="layout_comfortable">Confortable</string>
+    <string name="layout_compact">Compact</string>
+    <string name="layout_text_under">Texte-dessous</string>
+</resources>

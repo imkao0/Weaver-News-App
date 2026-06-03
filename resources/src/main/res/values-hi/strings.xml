@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Hindi (hi) translations — core navigation & common UI strings.
+     Untranslated strings fall back to the default values/strings.xml (English). -->
+<resources>
+    <string name="app_name">Weaver</string>
+    <string name="nav_home">होम</string>
+    <string name="nav_video_feed">वीडियो</string>
+    <string name="nav_search">खोज</string>
+    <string name="nav_categories">श्रेणियाँ</string>
+    <string name="nav_bookmarks">बुकमार्क</string>
+    <string name="search_for_articles">लेख खोजें</string>
+    <string name="manage_topics">विषय प्रबंधित करें</string>
+    <string name="selected">चयनित</string>
+    <string name="topics">विषय</string>
+    <string name="no_videos_available">कोई वीडियो उपलब्ध नहीं</string>
+    <string name="settings">सेटिंग्स</string>
+    <string name="select_edition">संस्करण चुनें</string>
+    <string name="confirm">पुष्टि करें</string>
+    <string name="retry">पुनः प्रयास करें</string>
+    <string name="no_articles_available">कोई लेख उपलब्ध नहीं</string>
+    <string name="no_bookmarks_yet">अभी कोई बुकमार्क नहीं। सहेजे गए लेख यहाँ दिखेंगे।</string>
+    <string name="refresh">रीफ़्रेश करें</string>
+    <string name="blocked_sources">अवरुद्ध स्रोत</string>
+    <string name="dark_mode">डार्क मोड</string>
+    <string name="push_notifications">पुश सूचनाएँ</string>
+    <string name="recent_searches">हाल की खोजें</string>
+    <string name="clear">साफ़ करें</string>
+    <string name="share_video">वीडियो साझा करें</string>
+    <string name="add_to_favorites">पसंदीदा में जोड़ें</string>
+    <string name="remove_from_favorites">पसंदीदा से हटाएँ</string>
+    <string name="close_player">प्लेयर बंद करें</string>
+    <string name="layout_comfortable">आरामदायक</string>
+    <string name="layout_compact">कॉम्पैक्ट</string>
+    <string name="layout_text_under">पाठ-नीचे</string>
+</resources>

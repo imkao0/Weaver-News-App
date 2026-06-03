@@ -1,0 +1,10 @@
+plugins {
+    alias(libs.plugins.weaver.android.library)
+}
+
+// Hosts the app's shared resources (strings, drawables, mipmaps, layouts,
+// xml) as a library so every feature module can resolve `dev.mkao.weaver.R`.
+// The app module depends on this and packages the resources in the APK.
+android {
+    namespace 'dev.mkao.weaver'
+}
