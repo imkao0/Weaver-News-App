@@ -1,0 +1,20 @@
+plugins {
+    alias(libs.plugins.weaver.android.library)
+    alias(libs.plugins.weaver.android.hilt)
+}
+
+android {
+    namespace 'dev.mkao.weaver.common'
+}
+
+dependencies {
+    implementation libs.androidx.core.ktx
+    implementation libs.timber
+    implementation libs.retrofit
+    implementation libs.moshi
+    implementation libs.moshi.kotlin
+    implementation platform(libs.firebase.bom)
+    implementation libs.firebase.crashlytics
+    implementation libs.firebase.analytics.ktx
+    implementation libs.kotlinx.coroutines.core
+}
