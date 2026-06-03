@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- German (de) translations — core navigation & common UI strings.
+     Untranslated strings fall back to the default values/strings.xml (English). -->
+<resources>
+    <string name="app_name">Weaver</string>
+    <string name="nav_home">Start</string>
+    <string name="nav_video_feed">Videos</string>
+    <string name="nav_search">Suche</string>
+    <string name="nav_categories">Kategorien</string>
+    <string name="nav_bookmarks">Lesezeichen</string>
+    <string name="search_for_articles">Nach Artikeln suchen</string>
+    <string name="manage_topics">Themen verwalten</string>
+    <string name="selected">Ausgewählt</string>
+    <string name="topics">Themen</string>
+    <string name="no_videos_available">Keine Videos verfügbar</string>
+    <string name="settings">Einstellungen</string>
+    <string name="select_edition">Ausgabe wählen</string>
+    <string name="confirm">Bestätigen</string>
+    <string name="retry">Wiederholen</string>
+    <string name="no_articles_available">Keine Artikel verfügbar</string>
+    <string name="no_bookmarks_yet">Noch keine Lesezeichen. Gespeicherte Artikel erscheinen hier.</string>
+    <string name="refresh">Aktualisieren</string>
+    <string name="blocked_sources">Blockierte Quellen</string>
+    <string name="dark_mode">Dunkelmodus</string>
+    <string name="push_notifications">Push-Benachrichtigungen</string>
+    <string name="recent_searches">Letzte Suchen</string>
+    <string name="clear">Löschen</string>
+    <string name="share_video">Video teilen</string>
+    <string name="add_to_favorites">Zu Favoriten hinzufügen</string>
+    <string name="remove_from_favorites">Aus Favoriten entfernen</string>
+    <string name="close_player">Player schließen</string>
+    <string name="layout_comfortable">Komfortabel</string>
+    <string name="layout_compact">Kompakt</string>
+    <string name="layout_text_under">Text-darunter</string>
+</resources>

@@ -1,0 +1,4 @@
+<resources>
+    <string name="weaver">WEAVER</string>
+    <string name="Error404">Content Not Available, Api Response Error</string>
+</resources>

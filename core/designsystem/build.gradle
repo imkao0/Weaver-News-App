@@ -1,0 +1,21 @@
+plugins {
+    alias(libs.plugins.weaver.android.library)
+    alias(libs.plugins.weaver.android.library.compose)
+}
+
+android {
+    namespace 'dev.mkao.weaver.designsystem'
+}
+
+dependencies {
+    implementation project(':core:common')
+    implementation project(':core:domain')
+
+    // Re-export the app module so feature modules resolve `dev.mkao.weaver.R`
+    // (shared strings/drawables) transitively.
+    api project(':resources')
+
+    implementation libs.material.icons.extended
+    implementation libs.coil.compose
+    implementation libs.compose.shimmer
+}

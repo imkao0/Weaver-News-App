@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fresh_stories_and_bold_ideas_to_help_you_live_curiously">Fresh stories and bold ideas to help you live curiously</string>
+    <string name="discover">Discover</string>
+    <string name="settings">Settings</string>
+    <string name="About">Welcome to Weaver!\n\nWe are thrilled to have you here and hope you have a great time with us. With WEAVER, you can select the topics you are interested in from categories and receive news from thousands of interesting newspapers, magazines and blogs all in one place. With WEAVER, you can easily switch to topics of choice and read news. Over 60 countries with thousands of sources in one app are waiting for you.\n\nCONTACT\n\nWe always appreciate your feedback so we can improve with your help. Please send your feedback and suggestions by e-mail to: cnoceania@gmail.com</string>
+    <string name="AboutTitle">About Weaver</string>
+    <string name="search">Search</string>
+    <string name="menu">Menu</string>
+    <string name="arrow_forward">Arrow forward</string>
+    <string name="hey_check_out_this_awesome_app">Hey, check out this awesome app!</string>
+    <string name="Favourites">Bookmarks</string>
+    <string name="Error404">Content Not Available</string>
+</resources>
