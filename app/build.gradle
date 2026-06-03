@@ -1,122 +1,190 @@
 plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-    id 'com.google.dagger.hilt.android'
-    id 'kotlin-parcelize'
-    id 'kotlin-kapt'
+    alias(libs.plugins.weaver.android.application)
+    alias(libs.plugins.weaver.android.application.compose)
+    alias(libs.plugins.weaver.android.application.firebase)
+    alias(libs.plugins.weaver.android.hilt)
+    alias(libs.plugins.weaver.android.room)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.ktlint)
+    alias(libs.plugins.detekt)
+    alias(libs.plugins.baseline.profiles)
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localProperties.load(new FileInputStream(localPropertiesFile))
+}
+
+def versionPropsFile = rootProject.file("version.properties")
+def versionProps = new Properties()
+if (versionPropsFile.exists()) {
+    versionProps.load(new FileInputStream(versionPropsFile))
 }
 
 android {
     namespace 'dev.mkao.weaver'
-    compileSdk 35
 
     defaultConfig {
         applicationId "dev.mkao.weaver"
-        minSdk 24
-        targetSdk 35
-        versionCode 1
-        versionName "1.2"
+        versionCode versionProps.getProperty("VERSION_CODE", "1").toInteger()
+        versionName versionProps.getProperty("VERSION_NAME", "1.0")
+    }
 
-        vectorDrawables {
-            useSupportLibrary true
+    signingConfigs {
+        release {
+            def keystorePath = System.getenv("ANDROID_KEYSTORE_FILE")
+            if (keystorePath != null) {
+                storeFile = file(keystorePath)
+                storePassword = System.getenv("KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("KEY_ALIAS")
+                keyPassword = System.getenv("KEY_PASSWORD")
+            }
         }
     }
 
     buildTypes {
         release {
+            if (signingConfigs.release.storeFile != null) {
+                signingConfig signingConfigs.release
+            } else {
+                println "Release keystore not found, using debug signing config."
+                signingConfig signingConfigs.debug
+            }
             minifyEnabled true
             shrinkResources = true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        coreLibraryDesugaringEnabled true
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
 
+    buildTypes.each {
+        def gnewsApiKey = localProperties.getProperty("GNEWS_API_KEY") ?: "\"${System.getenv("GNEWS_API_KEY") ?: ""}\""
+        it.buildConfigField('String', 'GNEWS_API_KEY', gnewsApiKey)
+        def worldNewsApiKey = localProperties.getProperty("WORLDNEWS_API_KEY") ?: "\"${System.getenv("WORLDNEWS_API_KEY") ?: ""}\""
+        it.buildConfigField('String', 'WORLDNEWS_API_KEY', worldNewsApiKey)
     }
+
     kotlinOptions {
-        jvmTarget = '17'
+        freeCompilerArgs = ['-XXLanguage:+PropertyParamAnnotationDefaultTargetMode']
     }
-    buildFeatures {
-        compose true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion '1.4.6'
-    }
-    packagingOptions {
-        resources {
-            excludes += '/META-INF/{AL2.0,LGPL2.1}'
-        }
+
+    hilt {
+        enableAggregatingTask = true
     }
 }
 
+detekt {
+    config.setFrom(files("$rootDir/config/detekt/detekt.yml"))
+    buildUponDefaultConfig = true
+}
+
 dependencies {
+    implementation project(':resources')
+    implementation project(':core:domain')
+    implementation project(':core:common')
+    implementation project(':core:designsystem')
+    implementation project(':core:data')
 
-    implementation 'androidx.core:core-ktx:1.10.0'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
-    implementation 'androidx.activity:activity-compose:1.2.1'
-    implementation platform('androidx.compose:compose-bom:2024.01.00')
-    implementation 'androidx.compose.ui:ui'
-    implementation 'androidx.compose.ui:ui-graphics'
-    implementation 'androidx.compose.ui:ui-tooling-preview'
-    implementation 'com.google.android.material:material:1.11.0'
-    implementation("androidx.compose.material3:material3:1.2.0-rc01")
-    implementation 'androidx.paging:paging-common-ktx:3.2.1'
-    implementation 'androidx.paging:paging-compose:3.2.1'
-    implementation 'com.google.accompanist:accompanist-systemuicontroller:0.23.1'
-    implementation 'androidx.room:room-common:2.6.1'
-    implementation 'androidx.room:room-ktx:2.6.1'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    androidTestImplementation platform('androidx.compose:compose-bom:2024.01.00')
-    androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
-    debugImplementation 'androidx.compose.ui:ui-tooling'
-    debugImplementation 'androidx.compose.ui:ui-test-manifest'
-    debugImplementation "com.google.accompanist:accompanist-insets:0.23.1"
-    debugImplementation "com.google.accompanist:accompanist-systemuicontroller:0.23.1"
+    // Feature modules
+    implementation project(':features:shared')
+    implementation project(':features:home')
+    implementation project(':features:categories')
+    implementation project(':features:details')
+    implementation project(':features:search')
+    implementation project(':features:bookmarks')
+    implementation project(':features:settings')
+    implementation project(':features:onboarding')
+    implementation project(':features:languages')
+    implementation project(':features:videofeed')
+    implementation project(':features:about')
+    implementation project(':features:widget')
 
-    // Compose navigation
-    implementation "androidx.navigation:navigation-compose:2.5.3"
+    detektPlugins libs.detekt.formatting
 
-    //Dagger - Hilt
-    implementation "com.google.dagger:hilt-android:2.44.2"
-    kapt "com.google.dagger:hilt-android-compiler:2.44"
-    kapt "androidx.hilt:hilt-compiler:1.0.0"
-    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.core.splashscreen
+    implementation libs.androidx.appcompat
+    implementation libs.android.material
 
-    // Retrofit
-    implementation "com.squareup.retrofit2:retrofit:2.9.0"
-    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
-    implementation "com.google.accompanist:accompanist-pager:0.27.1"
+    implementation libs.androidx.lifecycle.runtime.ktx
+    implementation libs.androidx.lifecycle.runtime.compose
+    implementation libs.androidx.lifecycle.viewmodel.compose
+    implementation libs.androidx.lifecycle.viewmodel.ktx
 
-    // Coil
-    implementation "io.coil-kt:coil-compose:2.2.2"
+    implementation libs.material3.window.size.classes
+    implementation libs.android.material3.adaptive
+    implementation libs.android.material3.adaptive.layout
+    implementation libs.android.material3.adaptive.navigation
+    implementation libs.android.material3.adaptive.navigation.suite
+    implementation libs.material.icons.extended
+    implementation libs.androidx.activity.compose
 
-    //Desugaring
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.3'
+    implementation libs.coil.compose
+    implementation libs.compose.shimmer
+    implementation libs.accompanist.permissions
+    implementation libs.accompanist.systemuicontroller
 
-    // Fix Duplicate class
-    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
+    implementation libs.androidx.navigation3.runtime
+    implementation libs.androidx.navigation3.ui
+    implementation libs.androidx.lifecycle.viewmodel.navigation3
+    implementation libs.kotlinx.serialization.json
 
-    //splashscreen
-    implementation 'androidx.core:core-splashscreen:1.0.1'
-    //webview
-    implementation("androidx.webkit:webkit:1.10.0")
+    implementation libs.android.hilt.navigation.compose
+    implementation libs.android.hilt.work
+    ksp libs.android.hilt.work.compiler
 
-    //Jsoup and okhttp for Html building
-    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
-    implementation 'org.jsoup:jsoup:1.14.2'
-    implementation "com.google.accompanist:accompanist-systemuicontroller:0.30.1"
+    implementation libs.work.runtime.ktx
 
-    //RoomDatabase
+    implementation libs.retrofit
+    implementation libs.converter.moshi
+    implementation libs.converter.gson
+    implementation libs.gson
+    implementation libs.jsoup
+    implementation libs.okhttp
+    implementation libs.logging.interceptor
+    implementation libs.moshi
+    implementation libs.moshi.kotlin
+    ksp libs.moshi.kotlin.codegen
 
-    def room_version = "2.5.0"
-    implementation "androidx.room:room-runtime:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
-    implementation "androidx.room:room-ktx:$room_version"
+    implementation libs.androidx.browser
 
-    implementation "io.reactivex.rxjava3:rxkotlin:3.0.1"
-    implementation "io.reactivex.rxjava3:rxandroid:3.0.0"
+    implementation libs.media3.exoplayer
+    implementation libs.media3.ui
+    implementation libs.android.youtube.player
+
+    implementation libs.datastore.preferences
+
+    implementation libs.kotlinx.coroutines.core
+    implementation libs.kotlinx.coroutines.android
+
+    implementation libs.timber
+    debugImplementation libs.chucker.debug
+    releaseImplementation libs.chucker.release
+    debugImplementation libs.leakcanary.android
+
+    implementation libs.profileinstaller
+    baselineProfile project(':baselineprofile')
+
+    testImplementation libs.junit
+    testImplementation libs.kotlinx.coroutines.test
+    testImplementation libs.turbine
+    testImplementation libs.androidx.arch.core.testing
+    testImplementation libs.mockito.core
+    testImplementation libs.mockito.kotlin
+    testImplementation libs.androidx.work.testing
+    testImplementation libs.compose.ui.test.junit4
+    kspTest libs.hilt.android.compiler
+
+    androidTestImplementation libs.androidx.test.ext.junit
+    androidTestImplementation libs.androidx.test.runner
+    androidTestImplementation libs.espresso.core
+    androidTestImplementation libs.compose.ui.test.junit4
+    androidTestImplementation libs.room.testing
+    androidTestImplementation libs.androidx.work.testing
+    androidTestImplementation libs.hilt.android.testing
+    androidTestImplementation libs.mockito.android
+    androidTestImplementation libs.mockito.kotlin
+    kspAndroidTest libs.hilt.android.compiler
 }

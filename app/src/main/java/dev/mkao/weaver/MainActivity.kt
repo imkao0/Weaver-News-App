@@ -1,43 +1,77 @@
 package dev.mkao.weaver
 
-import android.graphics.Color
+import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Surface
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.navigation.compose.rememberNavController
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dagger.hilt.android.AndroidEntryPoint
-import dev.mkao.weaver.presentation.navigation.NewsNavGraph
-import dev.mkao.weaver.presentation.ui.theme.WeaverTheme
-import dev.mkao.weaver.util.PermissionsHandler
+import dev.mkao.weaver.data.preferences.UserPreferencesRepository
+import dev.mkao.weaver.domain.analytics.AnalyticsEvent
+import dev.mkao.weaver.domain.analytics.AnalyticsHelper
+import dev.mkao.weaver.features.widget.WidgetProvider
+import dev.mkao.weaver.navigation.ArticleDeepLink
+import dev.mkao.weaver.navigation.MainScreen
+import dev.mkao.weaver.presentation.common.theme.WeaverTheme
+import javax.inject.Inject
 
-@Suppress("DEPRECATION")
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-	private lateinit var permissionsHandler: PermissionsHandler
+    @Inject
+    lateinit var analyticsHelper: AnalyticsHelper
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		installSplashScreen()
+    @Inject
+    lateinit var preferencesRepository: UserPreferencesRepository
 
-		permissionsHandler = PermissionsHandler(this)
+    // Pending widget deep-link, consumed once by MainScreen.
+    private val pendingArticleDeepLink = mutableStateOf<ArticleDeepLink?>(null)
 
-		// Request notification permission if needed (Android 13+)
-		permissionsHandler.requestNotificationPermissionIfNeeded()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
 
-		window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-		window.decorView.systemUiVisibility =
-			View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-		window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-		window.statusBarColor = Color.WHITE
-		setContent {
-            WeaverTheme {
-                val navController = rememberNavController()
-                NewsNavGraph(navController = navController)
+        analyticsHelper.logEvent(AnalyticsEvent.AppOpen)
+        analyticsHelper.logEvent(AnalyticsEvent.ScreenView("home"))
+
+        pendingArticleDeepLink.value = intent.toArticleDeepLink()
+
+        setContent {
+            val windowSizeClass = currentWindowAdaptiveInfo().windowSizeClass
+            val isDarkMode by preferencesRepository.isDarkMode.collectAsStateWithLifecycle(initialValue = true)
+
+            WeaverTheme(darkTheme = isDarkMode) {
+                Surface(modifier = Modifier.fillMaxSize()) {
+                    MainScreen(
+                        windowSizeClass = windowSizeClass,
+                        articleDeepLink = pendingArticleDeepLink.value,
+                        onArticleDeepLinkConsumed = { pendingArticleDeepLink.value = null },
+                    )
+                }
             }
-		}
-	}
+        }
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        intent.toArticleDeepLink()?.let { pendingArticleDeepLink.value = it }
+    }
+
+    /** Maps a widget tap (ACTION_OPEN_ARTICLE + url extra) to an in-app deep link. */
+    private fun Intent?.toArticleDeepLink(): ArticleDeepLink? {
+        val url = this?.getStringExtra(WidgetProvider.EXTRA_ARTICLE_URL)
+            ?: return null
+        val title = getStringExtra(WidgetProvider.EXTRA_ARTICLE_TITLE).orEmpty()
+        return ArticleDeepLink(articleUrl = url, title = title)
+    }
 }
