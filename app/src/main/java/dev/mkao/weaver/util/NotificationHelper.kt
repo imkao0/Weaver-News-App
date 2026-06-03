@@ -20,17 +20,15 @@ object NotificationHelper {
     const val NEWS_NOTIFICATION_ID = 1001
 
     fun createNotificationChannel(context: Context) {
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val importance = NotificationManager.IMPORTANCE_DEFAULT
             val channel = NotificationChannel(
                 CHANNEL_ID,
                 CHANNEL_NAME,
-                importance
+                importance,
             ).apply {
                 description = CHANNEL_DESCRIPTION
             }
-            // Register the channel with the system
             val notificationManager =
                 context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
@@ -48,7 +46,7 @@ object NotificationHelper {
             context,
             0,
             intent,
-            PendingIntent.FLAG_IMMUTABLE
+            PendingIntent.FLAG_IMMUTABLE,
         )
 
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
@@ -64,7 +62,6 @@ object NotificationHelper {
             try {
                 notify(NEWS_NOTIFICATION_ID, builder.build())
             } catch (e: SecurityException) {
-                
                 e.printStackTrace()
             }
         }
