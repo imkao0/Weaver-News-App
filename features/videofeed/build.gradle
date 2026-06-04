@@ -1,0 +1,34 @@
+plugins {
+    alias(libs.plugins.weaver.android.library)
+    alias(libs.plugins.weaver.android.library.compose)
+    alias(libs.plugins.weaver.android.hilt)
+}
+
+android {
+    namespace 'dev.mkao.weaver.features.videofeed'
+}
+
+dependencies {
+    implementation project(':core:domain')
+    implementation project(':core:common')
+    implementation project(':core:designsystem')
+    implementation project(':core:data')
+
+    implementation libs.androidx.lifecycle.runtime.compose
+    implementation libs.androidx.lifecycle.viewmodel.compose
+    implementation libs.android.hilt.navigation.compose
+    implementation libs.material.icons.extended
+    implementation libs.coil.compose
+    implementation libs.compose.shimmer
+
+    implementation libs.media3.exoplayer
+    implementation libs.media3.ui
+    implementation libs.android.youtube.player
+    implementation libs.timber
+    testImplementation libs.junit
+    testImplementation libs.kotlinx.coroutines.test
+    testImplementation libs.turbine
+    testImplementation libs.mockito.core
+    testImplementation libs.mockito.kotlin
+    testImplementation libs.androidx.arch.core.testing
+}
