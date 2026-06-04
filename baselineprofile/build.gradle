@@ -1,0 +1,16 @@
+plugins {
+    alias(libs.plugins.weaver.android.test)
+    alias(libs.plugins.baseline.profiles)
+}
+
+android {
+    namespace 'dev.mkao.weaver.baselineprofile'
+    targetProjectPath = ":app"
+}
+
+dependencies {
+    implementation libs.androidx.test.ext.junit
+    implementation libs.espresso.core
+    implementation libs.androidx.test.uiautomator
+    implementation libs.androidx.benchmark.macrobenchmark.junit4
+}

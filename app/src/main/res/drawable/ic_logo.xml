@@ -22,5 +22,3 @@
   <path android:pathData="M41.5 16L42 18.5L34.5 28L23.5 33L17 30.5L26 24.5L25 22.5L28 21Q26.9 18.3 29.5 19L32.5 20L34.5 18L41.5 16Z" android:fillColor="#797571" android:fillAlpha="0.9960784" android:strokeColor="#797571" android:strokeAlpha="0.9960784" android:strokeWidth="1"/>
   <path android:pathData="M46.5 20Q49.5 19.1 48 23.5Q44.4 32.9 36.5 38L24.5 44L13.5 44L10 41.5L18.5 38L24.5 32L31.5 30Q36.9 22.9 46.5 20Z" android:fillColor="#E81838" android:strokeColor="#E81838" android:strokeWidth="1"/>
 </vector>
-
-

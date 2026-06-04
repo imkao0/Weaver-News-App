@@ -1,0 +1,51 @@
+name: Automated GitHub Release
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Extract Version Name
+        id: get_version
+        run: |
+          VERSION_NAME=$(grep '^VERSION_NAME=' version.properties | cut -d'=' -f2)
+          echo "VERSION_NAME=$VERSION_NAME" >> $GITHUB_OUTPUT
+          echo "TAG_NAME=v$VERSION_NAME" >> $GITHUB_OUTPUT
+
+      - name: Build Release APK
+        run: ./gradlew assembleRelease
+        env:
+          GNEWS_API_KEY: ${{ secrets.GNEWS_API_KEY }}
+          WORLDNEWS_API_KEY: ${{ secrets.WORLDNEWS_API_KEY }}
+
+      - name: Create GitHub Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "app/build/outputs/apk/release/*.apk"
+          tag: ${{ steps.get_version.outputs.TAG_NAME }}
+          name: Release ${{ steps.get_version.outputs.VERSION_NAME }}
+          body: "Automated release for version ${{ steps.get_version.outputs.VERSION_NAME }}. Contains updates from latest merges including library updates."
+          token: ${{ secrets.GITHUB_TOKEN }}
+          allowUpdates: true
