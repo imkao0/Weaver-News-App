@@ -1,0 +1,44 @@
+plugins {
+    alias(libs.plugins.weaver.android.library)
+    alias(libs.plugins.weaver.android.library.compose)
+    alias(libs.plugins.weaver.android.hilt)
+}
+
+android {
+    namespace 'dev.mkao.weaver.features.settings'
+
+    defaultConfig {
+        def versionProps = new Properties()
+        def versionPropsFile = rootProject.file('version.properties')
+        if (versionPropsFile.exists()) {
+            versionProps.load(versionPropsFile.newInputStream())
+        }
+        def appVersionName = versionProps.getProperty("VERSION_NAME", "1.0")
+        versionName appVersionName
+        // Library modules don't emit VERSION_NAME into BuildConfig by default.
+        buildConfigField "String", "VERSION_NAME", "\"${appVersionName}\""
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+}
+
+dependencies {
+    implementation project(':core:domain')
+    implementation project(':core:common')
+    implementation project(':core:designsystem')
+    implementation project(':core:data')
+
+    implementation libs.androidx.lifecycle.runtime.compose
+    implementation libs.androidx.lifecycle.viewmodel.compose
+    implementation libs.android.hilt.navigation.compose
+    implementation libs.material.icons.extended
+    implementation libs.timber
+    testImplementation libs.junit
+    testImplementation libs.kotlinx.coroutines.test
+    testImplementation libs.turbine
+    testImplementation libs.mockito.core
+    testImplementation libs.mockito.kotlin
+    testImplementation libs.androidx.arch.core.testing
+}
