@@ -1,0 +1,23 @@
+plugins {
+    alias(libs.plugins.weaver.android.library)
+    alias(libs.plugins.weaver.android.library.compose)
+    alias(libs.plugins.weaver.android.hilt)
+}
+
+android {
+    namespace 'dev.mkao.weaver.features.languages'
+}
+
+dependencies {
+    implementation project(':core:domain')
+    implementation project(':core:common')
+    implementation project(':core:designsystem')
+    implementation project(':features:home')
+    implementation project(':features:shared')
+
+    implementation libs.androidx.lifecycle.runtime.compose
+    implementation libs.androidx.lifecycle.viewmodel.compose
+    implementation libs.android.hilt.navigation.compose
+    implementation libs.material.icons.extended
+    implementation libs.coil.compose
+}
