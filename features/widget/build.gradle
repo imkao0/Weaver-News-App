@@ -1,0 +1,21 @@
+plugins {
+    alias(libs.plugins.weaver.android.library)
+    alias(libs.plugins.weaver.android.library.compose)
+    alias(libs.plugins.weaver.android.hilt)
+    alias(libs.plugins.weaver.android.room)
+}
+
+android {
+    namespace 'dev.mkao.weaver.features.widget'
+}
+
+dependencies {
+    implementation project(':core:data')
+    implementation project(':core:domain')
+    implementation project(':core:common')
+    implementation project(':resources')
+
+    implementation libs.work.runtime.ktx
+    implementation libs.android.hilt.work
+    ksp libs.android.hilt.work.compiler
+}

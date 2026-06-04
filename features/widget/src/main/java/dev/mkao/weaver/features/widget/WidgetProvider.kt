@@ -1,4 +1,4 @@
-package dev.mkao.weaver.presentation.widget
+package dev.mkao.weaver.features.widget
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
@@ -8,10 +8,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.widget.RemoteViews
-import dev.mkao.weaver.R
-import dev.mkao.weaver.MainActivity
 import androidx.core.net.toUri
-
+import dev.mkao.weaver.R
 
 class WidgetProvider : AppWidgetProvider() {
 
@@ -20,7 +18,6 @@ class WidgetProvider : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray
     ) {
-
         for (appWidgetId in appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId)
         }
@@ -40,27 +37,19 @@ class WidgetProvider : AppWidgetProvider() {
         }
     }
 
-    override fun onEnabled(context: Context) {
-
-    }
-
-    override fun onDisabled(context: Context) {
-
-    }
-
     companion object {
         const val ACTION_REFRESH_WIDGET = "dev.mkao.weaver.REFRESH_WIDGET"
+        const val ACTION_OPEN_ARTICLE = "dev.mkao.weaver.OPEN_ARTICLE"
         const val EXTRA_ARTICLE_URL = "dev.mkao.weaver.EXTRA_ARTICLE_URL"
+        const val EXTRA_ARTICLE_TITLE = "dev.mkao.weaver.EXTRA_ARTICLE_TITLE"
 
         internal fun updateAppWidget(
             context: Context,
             appWidgetManager: AppWidgetManager,
             appWidgetId: Int
         ) {
-            // Construct the RemoteViews object
             val views = RemoteViews(context.packageName, R.layout.news_widget)
 
-            // Intent for the ListView service
             val serviceIntent = Intent(context, WidgetService::class.java).apply {
                 putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
                 data = this.toUri(Intent.URI_INTENT_SCHEME).toUri()
@@ -68,7 +57,6 @@ class WidgetProvider : AppWidgetProvider() {
             views.setRemoteAdapter(R.id.widget_list_view, serviceIntent)
             views.setEmptyView(R.id.widget_list_view, R.id.widget_empty_view)
 
-            // Refresh button click intent
             val refreshIntent = Intent(context, WidgetProvider::class.java).apply {
                 action = ACTION_REFRESH_WIDGET
             }
@@ -84,8 +72,10 @@ class WidgetProvider : AppWidgetProvider() {
             )
             views.setOnClickPendingIntent(R.id.widget_refresh_button, refreshPendingIntent)
 
-            // Intent when the header is clicked
-            val appIntent = Intent(context, MainActivity::class.java)
+            // Header intent - pointing to MainActivity
+            val appIntent = Intent().setComponent(
+                ComponentName(context.packageName, "dev.mkao.weaver.MainActivity")
+            )
             val appPendingIntent = PendingIntent.getActivity(
                 context,
                 0,
@@ -94,12 +84,20 @@ class WidgetProvider : AppWidgetProvider() {
             )
             views.setOnClickPendingIntent(R.id.widget_header, appPendingIntent)
 
-            val clickIntent = Intent(Intent.ACTION_VIEW)
+            val clickIntent = Intent().setComponent(
+                ComponentName(context.packageName, "dev.mkao.weaver.MainActivity")
+            ).apply {
+                action = ACTION_OPEN_ARTICLE
+            }
             val clickPendingIntent = PendingIntent.getActivity(
                 context,
                 0,
                 clickIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
+                } else {
+                    PendingIntent.FLAG_UPDATE_CURRENT
+                }
             )
             views.setPendingIntentTemplate(R.id.widget_list_view, clickPendingIntent)
 
