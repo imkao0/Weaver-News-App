@@ -124,6 +124,7 @@ dependencies {
     implementation libs.coil.compose
     implementation libs.compose.shimmer
     implementation libs.accompanist.permissions
+    implementation libs.accompanist.systemuicontroller
 
     implementation libs.androidx.navigation3.runtime
     implementation libs.androidx.navigation3.ui
@@ -138,6 +139,9 @@ dependencies {
 
     implementation libs.retrofit
     implementation libs.converter.moshi
+    implementation libs.converter.gson
+    implementation libs.gson
+    implementation libs.jsoup
     implementation libs.okhttp
     implementation libs.logging.interceptor
     implementation libs.moshi

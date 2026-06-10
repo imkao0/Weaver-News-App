@@ -48,6 +48,9 @@ materialIconsExtended = "1.7.8"
 coilCompose = "2.7.0"
 composeShimmer = "1.3.3"
 accompanistPermissions = "0.36.0"      # 0.37.x needs Kotlin 2.2.20+
+gson = "2.14.0"
+jsoup = "1.23.2"
+accompanistSystemuicontroller = "0.36.0"
 
 # --- Dependency injection & background work ---
 daggerHilt = "2.57.2"                  # 2.57.2 is the newest line that fixes the Kotlin 2.2 metadata bug (#4779) while still running on KSP1 / AGP 8.x
@@ -150,6 +153,10 @@ logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-intercep
 moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
 moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshi" }
 moshi-kotlin-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshi" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }
+accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistSystemuicontroller" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 androidx-browser = { module = "androidx.browser:browser", version.ref = "androidxBrowser" }
 
