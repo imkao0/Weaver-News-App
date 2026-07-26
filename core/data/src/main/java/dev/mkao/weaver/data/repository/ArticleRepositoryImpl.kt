@@ -4,7 +4,7 @@ import dev.mkao.weaver.domain.model.Article
 import dev.mkao.weaver.domain.model.RecentSearch
 import dev.mkao.weaver.domain.repository.BookmarksRepository
 import dev.mkao.weaver.domain.repository.HeadlinesRepository
-import dev.mkao.weaver.domain.repository.Repository
+import dev.mkao.weaver.domain.repository.ArticleRepository
 import dev.mkao.weaver.domain.repository.SearchRepository
 import dev.mkao.weaver.util.Result
 import javax.inject.Inject
@@ -12,16 +12,14 @@ import javax.inject.Singleton
 import kotlinx.coroutines.flow.Flow
 
 /**
- * Legacy "God Repository" implementation that delegates to the new focused
- * repositories. This allows a phased migration of the app's ViewModels and
- * workers from the monolithic Repository interface to the specific ones.
+ * Modern implementation that delegates to the new focused repositories.
  */
 @Singleton
-class RepositoryImpl @Inject constructor(
+class ArticleRepositoryImpl @Inject constructor(
     private val headlinesRepo: HeadlinesRepository,
     private val searchRepo: SearchRepository,
     private val bookmarksRepo: BookmarksRepository,
-) : Repository {
+) : ArticleRepository {
 
     override fun getArticlesStream(): Flow<List<Article>> =
         headlinesRepo.getArticlesStream()

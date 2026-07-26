@@ -6,12 +6,12 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.mkao.weaver.data.repository.BookmarksRepositoryImpl
 import dev.mkao.weaver.data.repository.HeadlinesRepositoryImpl
-import dev.mkao.weaver.data.repository.RepositoryImpl
+import dev.mkao.weaver.data.repository.ArticleRepositoryImpl
 import dev.mkao.weaver.data.repository.SearchRepositoryImpl
 import dev.mkao.weaver.data.repository.VideoRepositoryImpl
 import dev.mkao.weaver.domain.repository.BookmarksRepository
 import dev.mkao.weaver.domain.repository.HeadlinesRepository
-import dev.mkao.weaver.domain.repository.Repository
+import dev.mkao.weaver.domain.repository.ArticleRepository
 import dev.mkao.weaver.domain.repository.SearchRepository
 import dev.mkao.weaver.domain.repository.VideoRepository
 import javax.inject.Singleton
@@ -43,5 +43,5 @@ abstract class RepositoryModule {
 
     @Singleton
     @Binds
-    abstract fun bindRepository(impl: RepositoryImpl): Repository
+    abstract fun bindArticleRepository(impl: ArticleRepositoryImpl): ArticleRepository
 }

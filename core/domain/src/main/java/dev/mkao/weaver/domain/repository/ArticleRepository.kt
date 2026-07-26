@@ -5,7 +5,7 @@ import dev.mkao.weaver.domain.model.RecentSearch
 import dev.mkao.weaver.util.Result
 import kotlinx.coroutines.flow.Flow
 
-interface Repository {
+interface ArticleRepository {
 
     /** Reactive stream of all cached articles (the local SSOT). */
     fun getArticlesStream(): Flow<List<Article>>

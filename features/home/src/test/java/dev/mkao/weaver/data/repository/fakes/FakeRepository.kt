@@ -5,7 +5,7 @@ import dev.mkao.weaver.domain.model.RecentSearch
 import dev.mkao.weaver.domain.repository.BookmarksRepository
 import dev.mkao.weaver.domain.repository.HeadlinesRepository
 import dev.mkao.weaver.domain.repository.PagedResult
-import dev.mkao.weaver.domain.repository.Repository
+import dev.mkao.weaver.domain.repository.ArticleRepository
 import dev.mkao.weaver.domain.repository.SearchRepository
 import dev.mkao.weaver.util.Result
 import kotlinx.coroutines.flow.Flow
@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.map
 /**
  * In-memory repository fake for fast, deterministic unit tests.
  */
-class FakeRepository : Repository, HeadlinesRepository, SearchRepository, BookmarksRepository {
+class FakeRepository : ArticleRepository, HeadlinesRepository, SearchRepository, BookmarksRepository {
 
     private val articlesState = MutableStateFlow<List<Article>>(emptyList())
     private val bookmarkedUrls = MutableStateFlow<Set<String>>(emptySet())
