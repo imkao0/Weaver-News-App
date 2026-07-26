@@ -55,17 +55,6 @@ fun AboutMe() {
                     .align(Alignment.Center)
                     .size(Dimens.AboutImageSize),
             )
-            Box(
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .fillMaxWidth()
-                    .height(Dimens.PaddingExtraLarge)
-                    .background(
-                        brush = Brush.verticalGradient(
-                            colors = listOf(Color.Transparent, Color.Black.copy(alpha = 0.5f)),
-                        ),
-                    ),
-            )
         }
         Text(
             text = stringResource(R.string.AboutTitle),

@@ -9,7 +9,7 @@ import android.content.Intent
 import android.os.Build
 import android.widget.RemoteViews
 import androidx.core.net.toUri
-import dev.mkao.weaver.resources.R
+import dev.mkao.weaver.R
 
 class WidgetProvider : AppWidgetProvider() {
 
@@ -39,7 +39,9 @@ class WidgetProvider : AppWidgetProvider() {
 
     companion object {
         const val ACTION_REFRESH_WIDGET = "dev.mkao.weaver.REFRESH_WIDGET"
+        const val ACTION_OPEN_ARTICLE = "dev.mkao.weaver.OPEN_ARTICLE"
         const val EXTRA_ARTICLE_URL = "dev.mkao.weaver.EXTRA_ARTICLE_URL"
+        const val EXTRA_ARTICLE_TITLE = "dev.mkao.weaver.EXTRA_ARTICLE_TITLE"
 
         internal fun updateAppWidget(
             context: Context,
@@ -82,12 +84,20 @@ class WidgetProvider : AppWidgetProvider() {
             )
             views.setOnClickPendingIntent(R.id.widget_header, appPendingIntent)
 
-            val clickIntent = Intent(Intent.ACTION_VIEW)
+            val clickIntent = Intent().setComponent(
+                ComponentName(context.packageName, "dev.mkao.weaver.MainActivity")
+            ).apply {
+                action = ACTION_OPEN_ARTICLE
+            }
             val clickPendingIntent = PendingIntent.getActivity(
                 context,
                 0,
                 clickIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
+                } else {
+                    PendingIntent.FLAG_UPDATE_CURRENT
+                }
             )
             views.setPendingIntentTemplate(R.id.widget_list_view, clickPendingIntent)
 

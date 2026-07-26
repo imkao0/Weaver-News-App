@@ -13,8 +13,7 @@ class BaselineProfileGenerator {
 
     @Test
     fun generate() = baselineProfileRule.collect(
-        packageName = "dev.mkao.weaver",
-        includeInvolvedProcesses = true
+        packageName = "dev.mkao.weaver"
     ) {
         pressHome()
         startActivityAndWait()

@@ -7,11 +7,12 @@ import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import androidx.core.net.toUri
 import androidx.room.Room
+import dev.mkao.weaver.R
 import dev.mkao.weaver.data.database.NewsDao
 import dev.mkao.weaver.data.database.NewsDatabase
 import dev.mkao.weaver.data.database.asDomainModel
 import dev.mkao.weaver.domain.model.Article
-import dev.mkao.weaver.resources.R
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 
 class WidgetService : RemoteViewsService() {
@@ -38,7 +39,7 @@ class WidgetService : RemoteViewsService() {
 
         override fun onDataSetChanged() {
             runBlocking {
-                articles = newsDao.getArticles().take(5).asDomainModel()
+                articles = newsDao.getArticles().first().take(5).asDomainModel()
             }
         }
 
@@ -64,9 +65,10 @@ class WidgetService : RemoteViewsService() {
                 R.drawable.placeholder_image
             )
 
-            val fillInIntent = Intent(Intent.ACTION_VIEW).apply {
-                data = article.url.toUri()
+            val fillInIntent = Intent().apply {
+                action = WidgetProvider.ACTION_OPEN_ARTICLE
                 putExtra(WidgetProvider.EXTRA_ARTICLE_URL, article.url)
+                putExtra(WidgetProvider.EXTRA_ARTICLE_TITLE, article.title)
             }
             rv.setOnClickFillInIntent(R.id.widget_item_title, fillInIntent)
 
