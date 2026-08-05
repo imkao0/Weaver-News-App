@@ -8,10 +8,14 @@ import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.net.toUri
+import androidx.core.graphics.drawable.toBitmap
+import coil.imageLoader
+import coil.request.ImageRequest
+import coil.request.SuccessResult
 import dev.mkao.weaver.MainActivity
 import dev.mkao.weaver.R
 import dev.mkao.weaver.domain.model.Article
+import dev.mkao.weaver.features.widget.WidgetProvider
 
 object NotificationHelper {
     const val CHANNEL_ID = "news_notification_channel"
@@ -35,28 +39,50 @@ object NotificationHelper {
         }
     }
 
-    fun showNewsNotification(context: Context, article: Article) {
-        val intent = if (article.url.isNotEmpty()) {
-            Intent(Intent.ACTION_VIEW, article.url.toUri())
-        } else {
-            Intent(context, MainActivity::class.java)
+    suspend fun showNewsNotification(context: Context, article: Article) {
+        val bitmap = article.image?.let { imageUrl ->
+            val request = ImageRequest.Builder(context)
+                .data(imageUrl)
+                .build()
+            val result = context.imageLoader.execute(request)
+            if (result is SuccessResult) result.drawable.toBitmap() else null
+        }
+
+        val intent = Intent(context, MainActivity::class.java).apply {
+            action = WidgetProvider.ACTION_OPEN_ARTICLE
+            putExtra(WidgetProvider.EXTRA_ARTICLE_URL, article.url)
+            putExtra(WidgetProvider.EXTRA_ARTICLE_TITLE, article.title)
         }
 
         val pendingIntent = PendingIntent.getActivity(
             context,
             0,
             intent,
-            PendingIntent.FLAG_IMMUTABLE,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
         )
+
+        // Truncate description to first sentence
+        val contentText = article.description?.substringBefore(".")?.let { "$it." } ?: article.source.name
 
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_logo)
             .setContentTitle(article.title)
-            .setContentText(article.source.name)
-            .setStyle(NotificationCompat.BigTextStyle().bigText(article.description))
+            .setContentText(contentText)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
+
+        if (bitmap != null) {
+            builder.setLargeIcon(bitmap)
+            builder.setStyle(
+                NotificationCompat.BigPictureStyle()
+                    .bigPicture(bitmap)
+                    .setBigContentTitle(article.title)
+                    .setSummaryText(article.description),
+            )
+        } else {
+            builder.setStyle(NotificationCompat.BigTextStyle().bigText(article.description))
+        }
 
         with(NotificationManagerCompat.from(context)) {
             try {

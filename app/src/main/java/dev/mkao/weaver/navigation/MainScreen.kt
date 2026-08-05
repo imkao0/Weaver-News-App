@@ -1,5 +1,7 @@
 package dev.mkao.weaver.navigation
 
+import android.Manifest
+import android.os.Build
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
@@ -39,11 +41,14 @@ import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.window.core.layout.WindowSizeClass
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
 import dev.mkao.weaver.R
+import dev.mkao.weaver.features.details.DetailScreen
 import dev.mkao.weaver.presentation.common.theme.WeaverBackground
 import dev.mkao.weaver.presentation.common.theme.WeaverInactive
 import dev.mkao.weaver.presentation.common.theme.WeaverPrimary
-import dev.mkao.weaver.features.details.DetailScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -99,6 +104,10 @@ fun MainScreen(
     val navItemColors = weaverNavItemColors()
 
     val coroutineScope = rememberCoroutineScope()
+
+    if (isOnboardingCompleted == true) {
+        NotificationPermissionEffect()
+    }
 
     if (showNavSuite) {
         MainScreenWithNavSuite(
@@ -297,4 +306,20 @@ enum class AppDestination(
     SEARCH(R.string.nav_search, R.drawable.ic_search),
     CATEGORIES(R.string.nav_categories, R.drawable.ic_sliders),
     BOOKMARKS(R.string.nav_bookmarks, R.drawable.bookmark),
+}
+
+/** Notification-permission request (Android 13+). */
+@OptIn(ExperimentalPermissionsApi::class)
+@Composable
+private fun NotificationPermissionEffect() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        val notificationPermission = rememberPermissionState(
+            Manifest.permission.POST_NOTIFICATIONS,
+        )
+        LaunchedEffect(Unit) {
+            if (!notificationPermission.status.isGranted) {
+                notificationPermission.launchPermissionRequest()
+            }
+        }
+    }
 }
