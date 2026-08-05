@@ -1,119 +1,132 @@
 
-<h1 align="left">Weaver News</h1>  
+<p align="center">
+  <img src="https://raw.githubusercontent.com/mkaomwakuni/Weaver-News-App/feature/weaver-rebrand/core/designsystem/src/main/res/drawable/ic_logo.xml" alt="Logo" width="128" height="128">
+</p>
 
-<p align="left">  
-  <b>Stay Informed with the Global Latest News</b>  
-</p>  
-<p align="left">  
-  <b>Built from a Concept</b><br>  
-  Inspired by Rizal for Kretya Studio (<a href="https://dribbble.com/rzlartnto">profile</a>)<br></br>  
+<h1 align="center">Weaver News</h1>
 
-  <img src="https://cdn.dribbble.com/userupload/4987025/file/original-8039e9f39ace527b8e75f19223e6b303.png?resize=1504x1128" width="500" alt="Concept Image">  
-</p>  
+<p align="center">
+  <b>A global news application built with Jetpack Compose and Clean Architecture.</b>
+</p>
 
+<p align="center">
+  <img src="https://img.shields.io/badge/Kotlin-2.2-blue.svg?style=for-the-badge&logo=kotlin" alt="Kotlin">
+  <img src="https://img.shields.io/badge/Architecture-Clean-green.svg?style=for-the-badge" alt="Architecture">
+  <img src="https://img.shields.io/badge/UI-Compose-orange.svg?style=for-the-badge&logo=jetpackcompose" alt="Compose">
+  <img src="https://img.shields.io/badge/License-Apache_2.0-red.svg?style=for-the-badge" alt="License">
+</p>
 
-## Screenshots
+---
 
-<table>  
-  <tr>  
-    <td align="center">  
-      <img src="https://raw.githubusercontent.com/mkaomwakuni/Weaver-News-App/139ff93742487ab051faeb6ce550f47e81c4af32/app/src/androidTest/java/dev/mkao/weaver/WhatsApp%20Image%202024-02-06%20at%207-portrait.png" width="510" alt="Screenshot 1">  
-    </td>  
-    <td align="center">  
-      <img src="https://github.com/user-attachments/assets/95b413b8-9370-40fe-8283-e3b46b5295fc" width= "400" alt="Screenshot 2">  
-    </td>  
-        <td align="center">  
-      <img src= https://github.com/user-attachments/assets/27657eda-a6f8-40ac-a7f0-08f6bad46680 width="400" alt="Screenshot 4">  
-    </td>  
-       <td align="center">  
-      <img src="https://github.com/user-attachments/assets/c2e9d3e2-bb65-4e0d-bf5a-58edca0fc56f" width="400" alt="Screenshot 1">  
-    </td>  
-  </tr>  
-  <tr>  
-    <td align="center">  
-      <img src="https://github.com/user-attachments/assets/06117615-d0a4-429e-8c74-0073037b3792" width="200" alt="Screenshot 3">  
-    </td>  
-       <td align="center">  
-      <img src="https://github.com/user-attachments/assets/cbeded64-be2c-4eb1-b7b3-39cfd75e6b84" width="400" alt="Screenshot 1">  
-    </td>  
-    <td align="center">  
-      <img src="https://github.com/user-attachments/assets/58e93298-0097-4951-b9f7-de0e7d012101 "width="400" alt="Screenshot 4">  
-    </td>  
-        <td align="center">  
-      <img src="https://github.com/user-attachments/assets/b5344d42-5034-4ee2-bffa-dc73d778a9d5"  width="400" alt="Screenshot 5">  
-    </td>  
+## 📖 About the Project
 
-  </tr>  
-</table>  
+**Weaver News** is a modern mobile platform that allows users to discover, read, and manage global news in real time. The app provides a seamless reading experience where users can explore featured stories, view detailed article content, track categories, and bookmark news for offline access.
 
-## Key Features
+The platform supports multiple topics such as **Technology**, **Sports**, **Entertainment**, and **Science**, allowing users to easily browse and filter articles based on their interests. Each article listing includes comprehensive details such as high-quality images, publication metadata, HTML-parsed content, and sharing capabilities.
 
-- Browse and read the latest news articles from various trusted sources.
-- Filter news by categories such as technology, sports, entertainment, and more.
-- Save your favorite articles for offline reading (bookmarks).
-- Home screen widget for quick access to the latest news.
-- Push notifications for latest news updates.
-- Multi-language support with customizable language preferences.
-- Dark/Light theme support.
-- Beautiful animations and transitions between screens.
-- Loading effects for better user experience.
-- Article sharing functionality.
-- Detailed article view with HTML content parsing.
-- Intuitive and user-friendly interface for a seamless news reading experience.
+Built with **Jetpack Compose** and **Clean Architecture**, the application leverages real-time data synchronization via the GNews and World News APIs to ensure the latest global updates are reflected instantly across devices.
 
-## Technologies
+## 📸 Screenshots
 
-- <a href="https://github.com/JetBrains/kotlin">Kotlin</a>: Kotlin is a programming language that can run on JVM. Google has announced Kotlin as one of its officially supported programming languages in Android Studio; and the Android community is migrating at a pace from Java to Kotlin
-- <a href="https://github.com/android/compose">Jetpack Compose</a>  – Android’s modern  declarative UI toolkit  for building dynamic and responsive interfaces with Kotlin.
+<table>
+  <tr>
+    <td align="center"><img src="https://github.com/user-attachments/assets/c2e9d3e2-bb65-4e0d-bf5a-58edca0fc56f" width="250" alt="Home"></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/95b413b8-9370-40fe-8283-e3b46b5295fc" width="250" alt="Categories"></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/27657eda-a6f8-40ac-a7f0-08f6bad46680" width="250" alt="Search"></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="https://github.com/user-attachments/assets/cbeded64-be2c-4eb1-b7b3-39cfd75e6b84" width="250" alt="Settings"></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/58e93298-0097-4951-b9f7-de0e7d012101" width="250" alt="Bookmarks"></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/b5344d42-5034-4ee2-bffa-dc73d778a9d5" width="250" alt="Details"></td>
+  </tr>
+</table>
 
--  <a href="https://developer.android.com/reference/android/content/BroadcastReceiver">BroadcastReceiver</a> – A mechanism for  listening to system-wide or app-specific events  (e.g., network changes, battery status, screen on/off). Unlike background tasks, it reacts to real-time events.
+## ✨ Key Features
+- **Global News Hub**: Access news from thousands of magazines and blogs across 60+ countries.
+- **Adaptive Material 3 UI**: Beautiful, responsive design that adapts to phones, tablets, and foldables.
+- **TikTok-style Video Feed**: Immersive, full-screen video player for breaking news clips.
+- **Advanced Bookmarking**: Save articles to a local Room database for offline reading.
+- **Real-time Search**: Instant search results powered by GNews and World News providers.
+- **Home Screen Widgets**: Quick access to top headlines directly from the Android launcher.
+- **Performance Optimized**: Near-zero jank using Baseline Profiles and Macrobenchmarking.
+- **Customizable Theming**: Full support for Light and Dark modes.
 
--   <a href="https://developer.android.com/reference/androidx/work/WorkManager">WorkManager</a>  – A flexible  background task scheduler  for deferrable work (e.g., syncing data, notifications). Ensures tasks run even if the app closes.
-- <a href="https://github.com/square/retrofit">Retrofit</a>: Retrofit is a REST client for Java/ Kotlin and Android by Square inc under Apache 2.0 license. Its a simple network library that is used for network transactions. By using this library we can seamlessly capture JSON response from web service/web API
-- <a href="https://github.com/coil-kt/coil">Coil</a>: Image loading library for Kotlin coroutines.
-- <a href="https://github.com/android/architecture-components-samples/tree/main/RoomSample">  
-  Room</a>: Local database for efficient data storage. 
-- <a href ="https://material.io/develop/android"> Material </a>: Modular and customizable Material Design UI components for Android.  
-- <a href="https://developer.android.com/develop/ui/views/appwidgets">App Widgets</a>: Home screen    widget for quick news access.
-- <a href="https://developer.android.com/training/notify-user/build-notification">Notifications</a>:    Push notifications for latest news.
-- <a href="https://developer.android.com/kotlin/flow">Kotlin Flow</a>: For asynchronous data    streaming.
-- <a href="https://developer.android.com/kotlin/coroutines">Kotlin Coroutines</a>: A concurrency design pattern that you can use on Android to simplify code that executes asynchronously.
-- <a href="https://developer.android.com/topic/libraries/architecture/viewmodel"> ViewModel </a>: The ViewModel class is designed to store and manage UI-related data in a lifecycle conscious way
- <a href="https://developer.android.com/guide/navigation/navigation-getting-started">  Navigation</a>: Helps you implement navigation, from simple button clicks to more complex patterns, such as app bars and the navigation drawer.  
-- <a href="https://developer.android.com/develop/ui/views/launch/splash-screen">Hilt </a>: A dependency injection library for Android that reduces the boilerplate of doing manual dependency injection in your project
+## 🏗️ Structural Design Pattern
+The app follows the **Model-View-ViewModel (MVVM)** pattern, enhanced with principles from **Clean Architecture** to ensure better separation of concerns and maintainability.
 
+- **Models**: Represent data and core business logic (Domain Entities). These are pure Kotlin objects.
+- **Views**: Handle the UI layer and display visual elements using **Jetpack Compose**.
+- **ViewModels**: Serve as the bridge between views and data, transforming raw state into view-ready formats.
 
-## MVVM Architecture
+By combining MVVM with clean architecture layers (such as **Use Cases**, **Repositories**, and **Data Sources**), the codebase stays modular, testable, and easy to scale as the app grows.
 
-This project follows the MVVM (Model-View-ViewModel) architecture pattern for clean separation of  
-concerns:
+---
 
-- **Model**: Represents data and business logic (domain models, repositories)
-- **View**: UI components built with Jetpack Compose
-- **ViewModel**: Manages UI-related data, handles user interactions, and communicates with  
-  repositories
+## 🛠️ Tech Stack
 
+### [Kotlin](https://kotlinlang.org/)
+Kotlin is a modern, cross-platform, statically typed programming language. It is designed to be fully interoperable with Java, providing more safety, conciseness, and developer productivity for Android development.
 
-## Setup Requirements
+### [Jetpack Compose](https://developer.android.com/jetpack/compose)
+Android’s modern, declarative UI toolkit. It simplifies and accelerates UI development with less code, powerful tools, and intuitive Kotlin APIs.
 
--   Android device or emulator
--   Android Studio
+### [Hilt (Dagger)](https://dagger.dev/hilt/)
+A dependency injection library for Android that reduces the boilerplate of doing manual DI. It provides a standard way to use Dagger in your application.
 
-## Getting Started
+### [Retrofit](https://square.github.io/retrofit/) & [OkHttp](https://square.github.io/okhttp/)
+The gold standard for networking on Android. Retrofit turns your HTTP API into a Java/Kotlin interface, while OkHttp handles the efficient underlying transport.
 
-[](https://github.com/mkaomwakuni/Weaver-News-App)
+### [Room Database](https://developer.android.com/training/data-storage/room)
+The Room persistence library provides an abstraction layer over SQLite to allow fluent database access while leveraging the full power of SQLite.
 
-In order to get the app running yourself, you need to:
+### [Navigation 3](https://developer.android.com/guide/navigation/navigation3)
+The next evolution of Android Navigation, providing type-safe routing and improved support for adaptive, multi-pane layouts.
 
-1.  Clone this project
-2.  Import the project into Android Studio
-3.  Connect your android device with USB or just start your emulator
-4.  After the project has finished setting up it stuffs, click the run button
+### [WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager)
+The library for scheduling deferrable, asynchronous tasks that must be run, such as your periodic background news refreshes.
 
-## Support
+### [Coil](https://coil-kt.github.io/coil/)
+An image loading library for Android backed by Kotlin Coroutines. It is fast, lightweight, and modern.
 
-[](https://github.com/mkaomwakuni/Weaver-News-App)
+### [DataStore](https://developer.android.com/topic/libraries/architecture/datastore)
+A data storage solution that allows you to store key-value pairs or typed objects with protocol buffers. It is the modern replacement for SharedPreferences.
 
--   Found this project useful ❤️? Support by clicking the ⭐️ button on the upper right of this page. ✌️
--   Notice anything else missing? File an issue
--   Feel free to contribute in any way to the project from typos in docs to code review are all welcome.
+### [Baseline Profiles](https://developer.android.com/topic/performance/baselineprofiles) & [Macrobenchmark](https://developer.android.com/topic/performance/benchmarking/macrobenchmark-overview)
+Tools used to optimize application startup and runtime performance by providing the runtime with hints about code execution paths.
+
+### [GitHub Actions](https://github.com/features/actions)
+Automated CI/CD workflows for building, testing, and releasing the application directly from the repository.
+
+### [Fastlane](https://fastlane.tools/)
+An open-source platform that simplifies Android deployment, automating builds and Play Store releases.
+
+---
+
+## 🚀 Setup Requirements
+- Android device or Emulator (API 24+)
+- Android Studio Ladybug | 2024.2.1 or newer
+- JDK 17
+
+## 🏁 Getting Started
+1. **Clone the project**:
+   ```bash
+   git clone https://github.com/mkaomwakuni/Weaver-News-App.git
+   ```
+2. **Import into Android Studio**: Open the cloned folder.
+3. **Configure API Keys**: Add your keys to `local.properties`:
+   ```properties
+   GNEWS_API_KEY="your_api_key"
+   WORLDNEWS_API_KEY="your_api_key"
+   ```
+4. **Build & Run**: Click the **Run** button to deploy to your device.
+
+---
+
+## 🤝 Support
+- Found this project useful ❤️? Support by clicking the ⭐️ button on the upper right of this page. ✌️
+- Notice anything missing? **File an issue**.
+- Feel free to **contribute** in any way—from typos in docs to code reviews, all are welcome.
+
+<p align="center">
+  Developed by <b>mkaomwakuni</b> ✌️
+</p>
