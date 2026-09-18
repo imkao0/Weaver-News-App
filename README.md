@@ -24,20 +24,30 @@
 
 The platform supports multiple topics such as **Technology**, **Sports**, **Entertainment**, and **Science**, allowing users to easily browse and filter articles based on their interests. Each article listing includes comprehensive details such as high-quality images, publication metadata, HTML-parsed content, and sharing capabilities.
 
-Built with **Jetpack Compose** and **Clean Architecture**, the application leverages real-time data synchronization via the GNews and World News APIs to ensure the latest global updates are reflected instantly across devices.
+Built with **Jetpack Compose** and **Clean Architecture**, the application leverages real-time data synchronization via the **GNews API** to ensure the latest global updates are reflected instantly across devices.
 
 ## 📸 Screenshots
 
 <table>
   <tr>
-    <td align="center"><img src="https://github.com/user-attachments/assets/c2e9d3e2-bb65-4e0d-bf5a-58edca0fc56f" width="250" alt="Home"></td>
-    <td align="center"><img src="https://github.com/user-attachments/assets/95b413b8-9370-40fe-8283-e3b46b5295fc" width="250" alt="Categories"></td>
-    <td align="center"><img src="https://github.com/user-attachments/assets/27657eda-a6f8-40ac-a7f0-08f6bad46680" width="250" alt="Search"></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/23bc32a7-a01a-4273-9aef-a4ed8ebc845b" width="250" alt="Screenshot 1"></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/e50b53b5-e9b1-44a0-a55d-093f58959d5f" width="250" alt="Screenshot 2"></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/5e719d19-e5ed-4c70-94ea-cc6e3079ddba" width="250" alt="Screenshot 3"></td>
   </tr>
   <tr>
-    <td align="center"><img src="https://github.com/user-attachments/assets/cbeded64-be2c-4eb1-b7b3-39cfd75e6b84" width="250" alt="Settings"></td>
-    <td align="center"><img src="https://github.com/user-attachments/assets/58e93298-0097-4951-b9f7-de0e7d012101" width="250" alt="Bookmarks"></td>
-    <td align="center"><img src="https://github.com/user-attachments/assets/b5344d42-5034-4ee2-bffa-dc73d778a9d5" width="250" alt="Details"></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/b3f0d5eb-9a67-4645-bc82-8c4ee08ad727" width="250" alt="Screenshot 4"></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/fdc8651a-a6b7-4d12-b626-84cc5b0f0f79" width="250" alt="Screenshot 5"></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/a7347bdb-d638-4d3b-a183-b78046440b4b" width="250" alt="Screenshot 6"></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="https://github.com/user-attachments/assets/4af125e9-1964-4fbd-9100-8fb3cbd24b58" width="250" alt="Screenshot 7"></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/2e90d082-1a16-4efa-9e89-9febeb18588a" width="250" alt="Screenshot 8"></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/f50a09ea-29a9-4bac-ab62-51ba031e57c3" width="250" alt="Screenshot 9"></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="https://github.com/user-attachments/assets/512f82b4-6ca2-4fe6-8cf4-1593fac4071c" width="250" alt="Screenshot 10"></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/b9e993d9-fefa-4e42-99ec-427dd2500056" width="250" alt="Screenshot 11"></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/c4a91757-b299-45b3-8852-75233844b779" width="250" alt="Screenshot 12"></td>
   </tr>
 </table>
 
@@ -46,7 +56,7 @@ Built with **Jetpack Compose** and **Clean Architecture**, the application lever
 - **Adaptive Material 3 UI**: Beautiful, responsive design that adapts to phones, tablets, and foldables.
 - **TikTok-style Video Feed**: Immersive, full-screen video player for breaking news clips.
 - **Advanced Bookmarking**: Save articles to a local Room database for offline reading.
-- **Real-time Search**: Instant search results powered by GNews and World News providers.
+- **Real-time Search**: Instant search results powered by the GNews provider.
 - **Home Screen Widgets**: Quick access to top headlines directly from the Android launcher.
 - **Performance Optimized**: Near-zero jank using Baseline Profiles and Macrobenchmarking.
 - **Customizable Theming**: Full support for Light and Dark modes.
@@ -88,6 +98,9 @@ The library for scheduling deferrable, asynchronous tasks that must be run, such
 ### [Coil](https://coil-kt.github.io/coil/)
 An image loading library for Android backed by Kotlin Coroutines. It is fast, lightweight, and modern.
 
+### [Chucker](https://github.com/ChuckerTeam/chucker)
+An HTTP inspector for Android & OkHttp that allows you to inspect and intercept HTTP(S) requests/responses in your application as a notification or home screen shortcut.
+
 ### [DataStore](https://developer.android.com/topic/libraries/architecture/datastore)
 A data storage solution that allows you to store key-value pairs or typed objects with protocol buffers. It is the modern replacement for SharedPreferences.
 
@@ -116,7 +129,6 @@ An open-source platform that simplifies Android deployment, automating builds an
 3. **Configure API Keys**: Add your keys to `local.properties`:
    ```properties
    GNEWS_API_KEY="your_api_key"
-   WORLDNEWS_API_KEY="your_api_key"
    ```
 4. **Build & Run**: Click the **Run** button to deploy to your device.
 

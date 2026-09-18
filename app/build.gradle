@@ -62,8 +62,6 @@ android {
     buildTypes.each {
         def gnewsApiKey = localProperties.getProperty("GNEWS_API_KEY") ?: "\"${System.getenv("GNEWS_API_KEY") ?: ""}\""
         it.buildConfigField('String', 'GNEWS_API_KEY', gnewsApiKey)
-        def worldNewsApiKey = localProperties.getProperty("WORLDNEWS_API_KEY") ?: "\"${System.getenv("WORLDNEWS_API_KEY") ?: ""}\""
-        it.buildConfigField('String', 'WORLDNEWS_API_KEY', worldNewsApiKey)
     }
 
     kotlinOptions {
