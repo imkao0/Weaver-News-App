@@ -56,7 +56,7 @@ accompanistSystemuicontroller = "0.36.0"
 daggerHilt = "2.57.2"                  # 2.57.2 is the newest line that fixes the Kotlin 2.2 metadata bug (#4779) while still running on KSP1 / AGP 8.x
 androidxHilt = "1.2.0"
 hiltAndroidTesting = "2.57.2"
-workRuntimeKtx = "2.11.1"              # latest stable at plan time
+workRuntimeKtx = "2.11.2"              # latest stable at plan time
 
 # --- Networking & serialization ---
 retrofit = "3.0.0"
