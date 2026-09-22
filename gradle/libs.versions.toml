@@ -21,7 +21,7 @@
 [versions]
 # --- Build platform ---
 androidGradlePlugin = "8.9.1"          # pinned to 8.9.1 — the minimum the Navigation3/lifecycle 2.10 stack requires; stays on the Gradle 8.x line
-kotlin = "2.2.10"
+kotlin = "2.4.20"
 ksp = "2.2.10-2.0.2"                   # must match the Kotlin 2.2.10 compiler
 ktlint = "12.3.0"
 detekt = "1.23.8"
