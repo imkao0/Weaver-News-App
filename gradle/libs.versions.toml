@@ -76,7 +76,7 @@ kotlinxCoroutines = "1.10.2"
 
 # --- Developer experience & debugging ---
 timber = "5.0.1"
-chuckerVersion = "4.0.0"
+chuckerVersion = "4.3.1"
 leakcanaryAndroid = "2.14"
 
 # --- Performance & telemetry ---
