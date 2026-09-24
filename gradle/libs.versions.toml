@@ -35,7 +35,7 @@ ktx = "1.17.0"
 appcompat = "1.7.1"
 androidMaterial = "1.13.0"
 lifecycle = "2.10.0"
-activityCompose = "1.12.4"
+activityCompose = "1.13.0"
 coreSplashscreen = "1.0.1"
 androidxWindowCore = "1.5.1"           # window-core layout WindowSizeClass
 
