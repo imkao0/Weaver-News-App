@@ -53,7 +53,7 @@ jsoup = "1.23.2"
 accompanistSystemuicontroller = "0.36.0"
 
 # --- Dependency injection & background work ---
-daggerHilt = "2.57.2"                  # 2.57.2 is the newest line that fixes the Kotlin 2.2 metadata bug (#4779) while still running on KSP1 / AGP 8.x
+daggerHilt = "2.60.1"                  # 2.57.2 is the newest line that fixes the Kotlin 2.2 metadata bug (#4779) while still running on KSP1 / AGP 8.x
 androidxHilt = "1.4.0"
 hiltAndroidTesting = "2.57.2"
 workRuntimeKtx = "2.11.2"              # latest stable at plan time
