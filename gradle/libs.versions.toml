@@ -36,7 +36,7 @@ appcompat = "1.8.0"
 androidMaterial = "1.13.0"
 lifecycle = "2.10.0"
 activityCompose = "1.13.0"
-coreSplashscreen = "1.0.1"
+coreSplashscreen = "1.2.0"
 androidxWindowCore = "1.5.1"           # window-core layout WindowSizeClass
 
 # --- Compose ---
