@@ -96,7 +96,7 @@ mockitoCore = "5.22.0"
 mockitoKotlin = "5.4.0"
 
 # --- Misc ---
-desugarJdkLibs = "2.0.4"
+desugarJdkLibs = "2.1.5"
 
 [libraries]
 # --- AndroidX core / lifecycle ---
