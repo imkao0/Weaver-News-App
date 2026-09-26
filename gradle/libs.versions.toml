@@ -31,7 +31,7 @@ firebasePerfGradlePlugin = "1.4.2"
 baselineProfile = "1.5.0"              # latest stable compatible with AGP 8.7.3
 
 # --- AndroidX core / lifecycle ---
-ktx = "1.17.0"
+ktx = "1.19.1"
 appcompat = "1.8.0"
 androidMaterial = "1.13.0"
 lifecycle = "2.10.0"
