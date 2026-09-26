@@ -42,7 +42,7 @@ androidxWindowCore = "1.5.1"           # window-core layout WindowSizeClass
 # --- Compose ---
 composeBom = "2025.12.01"              # latest stable BOM compatible with Kotlin 2.2.10
 androidMaterial3Adaptive = "1.3.0"     # adaptive skips 1.1.1: 1.1.0 -> 1.2.0
-navigation3 = "1.1.7"
+navigation3 = "1.2.0"
 lifecycleViewmodelNavigation3 = "2.10.0"
 materialIconsExtended = "1.7.8"
 coilCompose = "2.7.0"
