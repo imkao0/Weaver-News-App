@@ -69,7 +69,7 @@ androidYoutubePlayer = "13.0.0"
 
 # --- Persistence ---
 room = "2.7.2"
-datastorePreferences = "1.1.4"         # latest stable at plan time
+datastorePreferences = "1.2.1"         # latest stable at plan time
 
 # --- Coroutines ---
 kotlinxCoroutines = "1.10.2"
