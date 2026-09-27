@@ -72,7 +72,7 @@ room = "2.7.2"
 datastorePreferences = "1.2.1"         # latest stable at plan time
 
 # --- Coroutines ---
-kotlinxCoroutines = "1.10.2"
+kotlinxCoroutines = "1.11.0"
 
 # --- Developer experience & debugging ---
 timber = "5.0.1"
