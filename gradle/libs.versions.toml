@@ -92,7 +92,7 @@ androidxTestUiAutomator = "2.4.0"
 espresso = "3.7.0"
 androidxArchCoreTesting = "2.2.0"
 turbine = "1.2.1"
-mockitoCore = "5.22.0"
+mockitoCore = "5.24.0"
 mockitoKotlin = "5.4.0"
 
 # --- Misc ---
