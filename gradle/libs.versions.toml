@@ -68,7 +68,7 @@ media3 = "1.11.1"                         # ExoPlayer/Media3 for the TikTok-styl
 androidYoutubePlayer = "13.0.0"
 
 # --- Persistence ---
-room = "2.7.2"
+room = "2.8.5"
 datastorePreferences = "1.2.1"         # latest stable at plan time
 
 # --- Coroutines ---
