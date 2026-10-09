@@ -23,7 +23,7 @@
 androidGradlePlugin = "8.13.2"          # pinned to 8.9.1 — the minimum the Navigation3/lifecycle 2.10 stack requires; stays on the Gradle 8.x line
 kotlin = "2.4.20"
 ksp = "2.3.12"                   # must match the Kotlin 2.2.10 compiler
-ktlint = "12.3.0"
+ktlint = "14.2.0"
 detekt = "1.23.8"
 gmsPlugin = "4.5.0"
 firebaseCrashlyticsGradle = "3.0.8"
