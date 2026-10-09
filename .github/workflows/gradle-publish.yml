@@ -13,11 +13,13 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Set up JDK
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v5
         with:
-          java-version: '11'
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
       - name: Run lint
         run: ./gradlew lint
 
@@ -25,11 +27,13 @@ jobs:
     name: Checkstyle
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Set up JDK
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v5
         with:
-          java-version: '11'
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
       - name: Run Checkstyle
         run: ./gradlew checkstyle
 
@@ -37,11 +41,13 @@ jobs:
     name: SpotBugs
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Set up JDK
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v5
         with:
-          java-version: '11'
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
       - name: Run SpotBugs
         run: ./gradlew spotbugsMain
 
@@ -49,11 +55,13 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Set up JDK
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v5
         with:
-          java-version: '11'
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
       - name: Run tests
         run: ./gradlew test
 
@@ -61,11 +69,13 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Set up JDK
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v5
         with:
-          java-version: '11'
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
       - name: Build release APK
         run: ./gradlew assembleRelease
 
@@ -74,13 +84,15 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Set up JDK
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v5
         with:
-          java-version: '11'
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
       - name: Upload APK
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: app-release
           path: app/build/outputs/apk/release/app-release-unsigned.apk
