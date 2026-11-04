@@ -65,7 +65,7 @@ moshi = "1.15.2"
 kotlinxSerializationJson = "1.11.0"     # powers Navigation-3 type-safe routes
 androidxBrowser = "1.10.0"                # Chrome Custom Tabs for the detail screen
 media3 = "1.11.1"                         # ExoPlayer/Media3 for the TikTok-style full-screen video player
-androidYoutubePlayer = "13.0.0"
+androidYoutubePlayer = "13.1.0"
 
 # --- Persistence ---
 room = "2.8.5"
