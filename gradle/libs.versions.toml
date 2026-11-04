@@ -49,7 +49,7 @@ coilCompose = "2.7.0"
 composeShimmer = "1.5.0"
 accompanistPermissions = "0.37.3"      # 0.37.x needs Kotlin 2.2.20+
 gson = "2.15.0"
-jsoup = "1.23.2"
+jsoup = "1.24.1"
 accompanistSystemuicontroller = "0.36.0"
 
 # --- Dependency injection & background work ---
