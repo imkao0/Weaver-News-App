@@ -80,7 +80,7 @@ jobs:
         with:
           java-version: '11'
       - name: Upload APK
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v7
         with:
           name: app-release
           path: app/build/outputs/apk/release/app-release-unsigned.apk
