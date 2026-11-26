@@ -18,7 +18,7 @@ jobs:
           fetch-depth: 0
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: '17'
           distribution: 'temurin'
@@ -40,7 +40,7 @@ jobs:
           GNEWS_API_KEY: ${{ secrets.GNEWS_API_KEY }}
 
       - name: Create GitHub Release
-        uses: ncipollo/release-action@v1
+        uses: ncipollo/release-action@v5
         with:
           artifacts: "app/build/outputs/apk/release/*.apk"
           tag: ${{ steps.get_version.outputs.TAG_NAME }}
